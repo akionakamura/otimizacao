@@ -78,14 +78,15 @@ def find_dead_ends(graph):
     odd pair set finding.
 
     """
-    single_nodes = [k for k, order in graph.node_orders.items() if order == 1]
+    single_nodes = [k for k, order in graph.node_orders().items() if order == 1]
     return [x for k in single_nodes for x in graph.edges.values() \
-            if k in (x.head, x.tail)]
+            if k in (x.head, x.tail) and (not x.optional or full)]
 
 
 def build_node_pairs(graph):
     """ Builds all possible odd node pairs. """
-    odd_nodes = graph.odd_nodes
+    odd_nodes = graph.odd_nodes(full=False)
+    print('  Odd nodes:', str(odd_nodes))
     return [x for x in itertools.combinations(odd_nodes, 2)]
 
 def build_path_sets(node_pairs, set_size):
@@ -135,7 +136,6 @@ def build_min_set(node_solutions):
             odd_nodes.remove(node)
         if not odd_nodes:  # We've got a pair for every node
             break
-    print(path_set)
     return path_set
 
 
@@ -160,13 +160,17 @@ def add_new_edges(graph, min_route):
         for i in range(len(node) - 1):
             start, end = node[i], node[i + 1]
             cost = graph.edge_cost(start, end)  # Look up existing edge cost
-            new_graph.add_edge(start, end, cost, False)  # Append new edges
+            new_graph.add_edge(start, end, cost, False, False)  # Append new edges
+    new_graph.remove_optionals()
     return new_graph
 
 def make_eularian(graph):
     """ Add necessary paths to the graph such that it becomes Eularian. """
     print('\tDoubling dead_ends')
-    graph.add_edges([x.contents for x in find_dead_ends(graph)])  # Double our dead-ends
+    dead_ends = find_dead_ends(graph)
+    for dead_end in dead_ends:
+        print('\t\tDoublind dead end {}'.format(dead_end))
+    graph.add_edges([x.contents for x in dead_ends])  # Double our dead-ends
 
     print('\tBuilding possible odd node pairs')
     node_pairs = list(build_node_pairs(graph))
@@ -177,12 +181,14 @@ def make_eularian(graph):
     print('\t\t({} solutions)'.format(len(pair_solutions)))
 
     print('\tBuilding path sets')
-    pair_sets = (x for x in unique_pairs(graph.odd_nodes))
+    pair_sets = (x for x in unique_pairs(graph.odd_nodes(full=False)))
 
     print('\tFinding cheapest route')
     cheapest_set, min_route = find_minimum_path_set(pair_sets, pair_solutions)
+    print('\tMin routes to duplicate: {}'.format(min_route))
     print('\tAdding new edges')
-    return add_new_edges(graph, min_route)  # Add our new edges
+    new_graph = add_new_edges(graph, min_route)  # Add our new edges
+    return new_graph
 
 if __name__ == '__main__':
     import tests.run_tests

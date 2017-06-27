@@ -37,54 +37,54 @@ class Graph(object):
             match = self.find_edge(*args)  # Returns all matches
             del self.edges[list(match.keys())[0]]  # Delete first match only
 
-    @property
-    def nodes(self):
+    def nodes(self, full=True):
+        edges = { i: e for i, e in self.edges.items() if not e.optional or full }
         """ Return a set of all node indices in this graph. """
-        return set([node for edge in self.edges.values() \
+        return set([node for edge in edges.values() \
                     for node in (edge.head, edge.tail)])
-    @property
-    def node_keys(self):
+    def node_keys(self, full=True):
         """ Return a list of all node keys in this graph. """
-        return sorted(self.nodes)
+        return sorted(self.nodes(full))
 
-    @property
-    def node_orders(self):
+    def node_orders(self, full=True):
         """ Return how many connections a node has. """
-        return {x: len(self.edge_options(x)) for x in self.nodes}
+        return {x: len(self.edge_options(x, full)) for x in self.nodes(full)}
 
-    @property
-    def odd_nodes(self):
+    def odd_nodes(self, full=True):
         """ Return a list of odd nodes only. """
-        return [k for k in self.nodes if not \
-                my_math.is_even(self.node_orders[k])]
+        return [k for k in self.nodes(full) if not \
+                my_math.is_even(self.node_orders(full)[k])]
+    def remove_optionals(self):
+        optional_edges = [e for e in self.edges.values() if e.optional]
+        for e in optional_edges:
+            if e.optional:
+                self.remove_edge(*e.contents)
 
-    def node_options(self, node):
+    def node_options(self, node, full=True):
         """ Returns an ascending list of (node, cost) tuples connected
         to this node. """
+        edges = { i: e for i, e in self.edges.items() if not e.optional or full }
         options = []
-        for edge in self.edges.values():
+        for edge in edges.values():
             if edge.head == node:
                 options.append(edge.tail)
             elif edge.tail == node:
                 options.append(edge.head)
         return sorted(options)
 
-    @property
     def is_eularian(self):
         """ Return True if all nodes are of even order. """
-        return len(self.odd_nodes) == 0
+        return len(self.odd_nodes(full=False)) == 0
 
-    @property
     def is_semi_eularian(self):
         """ Return True if exactly 2 nodes are odd. """
-        return len(self.odd_nodes) == 2
+        return len(self.odd_nodes(full)) == 2
 
-    @property
-    def all_edges(self):
+    def all_edges(self, full=True):
         """ Returns a list of all edges in this graph. """
-        return list(self.edges.values())
+        return [ e for e in self.edges.values() if not e.optional or full ]
 
-    def find_edges(self, head, tail, cost=None, directed=None):
+    def find_edges(self, head, tail, cost=None, directed=None, optional=False):
         """
         Returns a {key: edge} dictionary of all matching edges.
 
@@ -97,24 +97,25 @@ class Graph(object):
                    (tail, head) == (edge.head, edge.tail):
                     results[key] = edge
             elif not directed:
-                if (head, tail, cost) == edge or \
-                   (tail, head, cost) == edge:
+                if (head, tail, cost, directed, optional) == edge or \
+                   (tail, head, cost, directed, optional) == edge:
                     results[key] = edge
             else:
-                if directed and (head, tail, cost, directed) == edge:
+                if directed and (head, tail, cost, directed, optional) == edge:
                     results[key] = edge
-                elif (tail, head, cost, directed) == edge:
+                elif (tail, head, cost, directed, optional) == edge:
                     results[key] = edge
         return results
 
-    def find_edge(self, head, tail, cost=None, directed=None):
+    def find_edge(self, head, tail, cost=None, directed=None, optional=False):
         """ Returns the first match for this edge. """
-        matches = self.find_edges(head, tail, cost, directed)
+        matches = self.find_edges(head, tail, cost, directed, optional)
         return dict((matches.popitem(),))  # One result only
 
-    def edge_options(self, node):
+    def edge_options(self, node, full=True):
         """ Return dictionary of available edges for a given node. """
-        return {k: v for k, v in self.edges.items() \
+        edges = { i: e for i, e in self.edges.items() if not e.optional or full }
+        return {k: v for k, v in edges.items() \
                 if node in (v.head, v.tail)}
 
     def edge_cost(self, *args):
@@ -125,9 +126,9 @@ class Graph(object):
     @property
     def total_cost(self):
         """ Return the total cost of this graph. """
-        return sum(x.weight for x in self.edges.values() if x.weight)
+        return sum(x.weight for x in self.edges.values() if x.weight and not x.optional)
 
-    def is_bridge(self, key):
+    def is_bridge(self, key, full=True):
         """
         Return True if an edge is a bridge.
 
@@ -159,10 +160,15 @@ class Graph(object):
                 except IndexError:  # We are back to the beginning
                     break
 
-        if len(visited) == len(self.nodes):  # We visited every node
+        if len(visited) == len(self.nodes(full)):  # We visited every node
             return False  # ... therefore we did not disconnect the graph
         else:
             return True  # The edge is a bridge
+
+    def sizes(self):
+        total_edges = len(self.edges)
+        optional_edges = len([e for i, e in self.edges.items() if e.optional])
+        return (total_edges, optional_edges)
 
     def __len__(self):
         return len(self.edges)
@@ -175,26 +181,27 @@ class Edge(object):
         self.tail = None  # End node
         self.weight = 0  # Cost
         self.directed = False  # Undirected by default
-        attrs = ('head', 'tail', 'weight', 'directed')
+        self.optional = False  # Must traverse by default
+        attrs = ('head', 'tail', 'weight', 'directed', 'optional')
         for attr, value in zip(attrs, args):
             setattr(self, attr, value)
 
     def __eq__(self, other):
         if len(other) == 3:
-            other = other + (False,)  # Assume undirected
-        return (self.head, self.tail, self.weight, self.directed) == other
+            other = other + (False, False)  # Assume undirected and obligatory
+        return (self.head, self.tail, self.weight, self.directed, self.optional) == other
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'Edge({}, {}, {}, {})'.format(self.head, self.tail,
-                                             self.weight, self.directed)
+        return 'Edge({}, {}, {}, {}, {})'.format(self.head, self.tail,
+                                             self.weight, self.directed, self.optional)
 
     def __len__(self):
         """ How many attribs we have. Kinda weird... """
         return len([x for x in \
-            (self.head, self.tail, self.weight, self.directed) \
+            (self.head, self.tail, self.weight, self.directed, self.optional) \
             if x is not None])
 
     def end(self, node):
@@ -209,7 +216,7 @@ class Edge(object):
     @property
     def contents(self):
         """ A tuple containing edge contents. """
-        return (self.head, self.tail, self.weight, self.directed)
+        return (self.head, self.tail, self.weight, self.directed, self.optional)
 
 if __name__ == '__main__':
     import tests.run_tests

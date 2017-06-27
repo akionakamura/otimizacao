@@ -4,76 +4,143 @@ Predefined graphs for testing and experimentation.
 
 """
 
-square = [  # Eularian, simple square
-    (1,2,1), (2,3,1), (3,4,1), (4,1,1)
+# Tennis court
+cpp = [
+    ('A', 'I', 11.885, False, False), ('A', 'M',   1.82, False, False), ('B', 'F',    6.4, False, False), ('C', 'G',   6.4, False, False),
+    ('D', 'H',    6.4, False, False), ('E', 'L', 11.885, False, False), ('E', 'Q',   1.82, False, False), ('F', 'G', 4.115, False, False),
+    ('F', 'J',  5.485, False, False), ('G', 'H',  4.115, False, False), ('H', 'K',  5.485, False, False), ('I', 'J',  1.37, False, False),
+    ('J', 'K',   8.23, False, False), ('K', 'L',   1.37, False, False), ('M', 'U', 11.885, False, False), ('N', 'R',   6.4, False, False),
+    ('O', 'S',    6.4, False, False), ('P', 'T',    6.4, False, False), ('Q', 'X', 11.885, False, False), ('R', 'V', 5.485, False, False),
+    ('R', 'S',  4.115, False, False), ('S', 'T',  4.115, False, False), ('T', 'W',  5.485, False, False), ('U', 'V',  1.37, False, False),
+    ('V', 'W',   8.23, False, False), ('W', 'X',   1.37, False, False)
 ]
 
-ice_cream = [  # Semi-Eularian, 2 triangles
-    (1,2,4), (1,3,3), (1,4,5), (2,3,3), (3,4,5)
-]
-sailboat = [  # Non-Eularian, 3 triangles
-    (1,2,4), (1,3,3), (1,5,10), (2,3,2), (2,4,3), (3,4,3), (4,5,9)
-]
-kite = [  # Semi-Eularian, 2 triangles w/ a tail
-    (1,2,4), (2,3,3), (3,4,2), (2,4,3), (5,4,2), (4,1,3)
+
+# Tennis court
+rpp1 = [
+    ('A', 'I', 11.885, False, False), ('A', 'M',   1.82, False, False), ('B', 'F',    6.4, False, False), ('C', 'G',   6.4, False, False),
+    ('D', 'H',    6.4, False, False), ('E', 'L', 11.885, False, False), ('E', 'Q',   1.82, False, False), ('F', 'G', 4.115, False, False),
+    ('F', 'J',  5.485, False, False), ('G', 'H',  4.115, False, False), ('H', 'K',  5.485, False, False), ('I', 'J',  1.37, False, False),
+    ('J', 'K',   8.23, False, False), ('K', 'L',   1.37, False, False), ('M', 'U', 11.885, False, False), ('N', 'R',   6.4, False, False),
+    ('O', 'S',    6.4, False, False), ('P', 'T',    6.4, False, False), ('Q', 'X', 11.885, False, False), ('R', 'V', 5.485, False, False),
+    ('R', 'S',  4.115, False, False), ('S', 'T',  4.115, False, False), ('T', 'W',  5.485, False, False), ('U', 'V',  1.37, False, False),
+    ('V', 'W',   8.23, False, False), ('W', 'X',   1.37, False, False)
+
+    # Serve area
+    , ('B', 'G',  7.609, False, True), ('B', 'H', 10.426, False, True), ('D', 'G',  7.609, False, True), ('D', 'F', 10.426, False, True)
+    , ('C', 'F',  7.609, False, True), ('C', 'H',  7.609, False, True), ('P', 'S',  7.609, False, True), ('P', 'R', 10.426, False, True)
+    , ('O', 'T',  7.609, False, True), ('O', 'R',  7.609, False, True), ('N', 'S',  7.609, False, True), ('N', 'T', 10.426, False, True)
 ]
 
-clover = [  # Eularian, square w/ parallel edges
-    (1,2,1), (1,2,2), (2,3,1), (2,3,2), (3,4,1), (3,4,2), (4,1,1), (4,1,2)
+# Tennis court
+rpp2 = [
+    ('A', 'I', 11.885, False, False), ('A', 'M',   1.82, False, False), ('B', 'F',    6.4, False, False), ('C', 'G',   6.4, False, False),
+    ('D', 'H',    6.4, False, False), ('E', 'L', 11.885, False, False), ('E', 'Q',   1.82, False, False), ('F', 'G', 4.115, False, False),
+    ('F', 'J',  5.485, False, False), ('G', 'H',  4.115, False, False), ('H', 'K',  5.485, False, False), ('I', 'J',  1.37, False, False),
+    ('J', 'K',   8.23, False, False), ('K', 'L',   1.37, False, False), ('M', 'U', 11.885, False, False), ('N', 'R',   6.4, False, False),
+    ('O', 'S',    6.4, False, False), ('P', 'T',    6.4, False, False), ('Q', 'X', 11.885, False, False), ('R', 'V', 5.485, False, False),
+    ('R', 'S',  4.115, False, False), ('S', 'T',  4.115, False, False), ('T', 'W',  5.485, False, False), ('U', 'V',  1.37, False, False),
+    ('V', 'W',   8.23, False, False), ('W', 'X',   1.37, False, False)
+
+    # Serve area
+    , ('B', 'G',  7.609, False, True), ('B', 'H', 10.426, False, True), ('D', 'G',  7.609, False, True), ('D', 'F', 10.426, False, True)
+    , ('C', 'F',  7.609, False, True), ('C', 'H',  7.609, False, True), ('P', 'S',  7.609, False, True), ('P', 'R', 10.426, False, True)
+    , ('O', 'T',  7.609, False, True), ('O', 'R',  7.609, False, True), ('N', 'S',  7.609, False, True), ('N', 'T', 10.426, False, True)
+
+    # Deep area
+    , ('H', 'J',  9.890, False, True), ('G', 'K',  6.857, False, True), ('G', 'J',  6.857, False, True), ('F', 'K',  9.890, False, True)
+    , ('T', 'V',  9.890, False, True), ('S', 'W',  6.857, False, True), ('S', 'V',  6.857, False, True), ('R', 'W',  9.890, False, True)
 ]
 
-# non-eularian w/ 6 odd nodes
-big_six = [
-    (1,2,8), (1,5,4), (1,8,3), (2,3,9), (2,7,6), (3,4,5),
-    (3,6,3), (4,5,5), (4,6,1), (5,6,2), (5,7,3), (7,8,1),
+# Tennis court
+rpp3 = [
+    ('A', 'I', 11.885, False, False), ('A', 'M',   1.82, False, False), ('B', 'F',    6.4, False, False), ('C', 'G',   6.4, False, False),
+    ('D', 'H',    6.4, False, False), ('E', 'L', 11.885, False, False), ('E', 'Q',   1.82, False, False), ('F', 'G', 4.115, False, False),
+    ('F', 'J',  5.485, False, False), ('G', 'H',  4.115, False, False), ('H', 'K',  5.485, False, False), ('I', 'J',  1.37, False, False),
+    ('J', 'K',   8.23, False, False), ('K', 'L',   1.37, False, False), ('M', 'U', 11.885, False, False), ('N', 'R',   6.4, False, False),
+    ('O', 'S',    6.4, False, False), ('P', 'T',    6.4, False, False), ('Q', 'X', 11.885, False, False), ('R', 'V', 5.485, False, False),
+    ('R', 'S',  4.115, False, False), ('S', 'T',  4.115, False, False), ('T', 'W',  5.485, False, False), ('U', 'V',  1.37, False, False),
+    ('V', 'W',   8.23, False, False), ('W', 'X',   1.37, False, False)
+
+    # Serve area
+    , ('B', 'G',  7.609, False, True), ('B', 'H', 10.426, False, True), ('D', 'G',  7.609, False, True), ('D', 'F', 10.426, False, True)
+    , ('C', 'F',  7.609, False, True), ('C', 'H',  7.609, False, True), ('P', 'S',  7.609, False, True), ('P', 'R', 10.426, False, True)
+    , ('O', 'T',  7.609, False, True), ('O', 'R',  7.609, False, True), ('N', 'S',  7.609, False, True), ('N', 'T', 10.426, False, True)
+
+    # Deep area
+    , ('H', 'J',  9.890, False, True), ('G', 'K',  6.857, False, True), ('G', 'J',  6.857, False, True), ('F', 'K',  9.890, False, True)
+    , ('T', 'V',  9.890, False, True), ('S', 'W',  6.857, False, True), ('S', 'V',  6.857, False, True), ('R', 'W',  9.890, False, True)
+
+    # Lateral area
+    , ('T', 'X',  5.654, False, True), ('T', 'Q',  6.545, False, True), ('P', 'X', 11.964, False, True), ('W', 'Q', 11.964, False, True)
+    , ('R', 'U',  5.654, False, True), ('R', 'M',  6.545, False, True), ('V', 'M', 11.964, False, True), ('U', 'N', 11.964, False, True)
+    , ('F', 'A',  6.545, False, True), ('F', 'I',  5.654, False, True), ('A', 'J', 11.964, False, True), ('B', 'I', 11.964, False, True)
+    , ('H', 'E',  6.545, False, True), ('H', 'L',  5.654, False, True), ('E', 'K', 11.964, False, True), ('D', 'L', 11.964, False, True)
 ]
 
-# Non-Eularian, 5 adjacent squares
-ladder = [
-    (1, 2,1), ( 1,12,1), ( 2, 3,1), (2,11,1), (3,4,1), (3,10,1),
-    (4, 5,1), ( 4, 9,1), ( 5, 6,1), (5, 8,1), (6,7,1), (7, 8,1), (8,9,1),
-    (9,10,1), (10,11,1), (11,12,1)
+# Tennis court
+rpp4 = [
+    ('A', 'I', 11.885, False, False), ('A', 'M',   1.82, False, False), ('B', 'F',    6.4, False, False), ('C', 'G',   6.4, False, False),
+    ('D', 'H',    6.4, False, False), ('E', 'L', 11.885, False, False), ('E', 'Q',   1.82, False, False), ('F', 'G', 4.115, False, False),
+    ('F', 'J',  5.485, False, False), ('G', 'H',  4.115, False, False), ('H', 'K',  5.485, False, False), ('I', 'J',  1.37, False, False),
+    ('J', 'K',   8.23, False, False), ('K', 'L',   1.37, False, False), ('M', 'U', 11.885, False, False), ('N', 'R',   6.4, False, False),
+    ('O', 'S',    6.4, False, False), ('P', 'T',    6.4, False, False), ('Q', 'X', 11.885, False, False), ('R', 'V', 5.485, False, False),
+    ('R', 'S',  4.115, False, False), ('S', 'T',  4.115, False, False), ('T', 'W',  5.485, False, False), ('U', 'V',  1.37, False, False),
+    ('V', 'W',   8.23, False, False), ('W', 'X',   1.37, False, False)
+
+    # Serve area
+    , ('B', 'G',  7.609, False, True), ('B', 'H', 10.426, False, True), ('D', 'G',  7.609, False, True), ('D', 'F', 10.426, False, True)
+    , ('C', 'F',  7.609, False, True), ('C', 'H',  7.609, False, True), ('P', 'S',  7.609, False, True), ('P', 'R', 10.426, False, True)
+    , ('O', 'T',  7.609, False, True), ('O', 'R',  7.609, False, True), ('N', 'S',  7.609, False, True), ('N', 'T', 10.426, False, True)
+
+    # Deep area
+    , ('H', 'J',  9.890, False, True), ('G', 'K',  6.857, False, True), ('G', 'J',  6.857, False, True), ('F', 'K',  9.890, False, True)
+    , ('T', 'V',  9.890, False, True), ('S', 'W',  6.857, False, True), ('S', 'V',  6.857, False, True), ('R', 'W',  9.890, False, True)
+
+    # Lateral area
+    , ('T', 'X',  5.654, False, True), ('T', 'Q',  6.545, False, True), ('P', 'X', 11.964, False, True), ('W', 'Q', 11.964, False, True)
+    , ('R', 'U',  5.654, False, True), ('R', 'M',  6.545, False, True), ('V', 'M', 11.964, False, True), ('U', 'N', 11.964, False, True)
+    , ('F', 'A',  6.545, False, True), ('F', 'I',  5.654, False, True), ('A', 'J', 11.964, False, True), ('B', 'I', 11.964, False, True)
+    , ('H', 'E',  6.545, False, True), ('H', 'L',  5.654, False, True), ('E', 'K', 11.964, False, True), ('D', 'L', 11.964, False, True)
+
+    # Cross field.
+    , ('B', 'K', 14.456, False, True), ('D', 'J', 14.456, False, True), ('P', 'V', 14.456, False, True), ('N', 'W', 14.456, False, True)
+    , ('A', 'K', 15.278, False, True), ('E', 'J', 15.278, False, True), ('A', 'L', 16.174, False, True), ('E', 'I', 16.174, False, True)
+    , ('M', 'W', 15.278, False, True), ('Q', 'V', 15.278, False, True), ('M', 'X', 16.174, False, True), ('Q', 'U', 16.174, False, True)
 ]
 
-# North of University Ave to beaches
-north = [
-    ( 1, 2, 1), ( 2, 3, 1), ( 3, 4, 1), ( 3,25, 6), ( 2, 4, 1), ( 2,24, 7),
-    ( 4, 5, 3), ( 5, 6, 1), ( 5,26, 6), ( 6, 7, 1), ( 6, 8, 1), ( 8, 9,12),
-    ( 8,26, 7), ( 9,10, 5), ( 9,19, 4), (10,11, 1), (10,19, 1), (10,12, 2),
-    (12,13, 4), (12,18, 1), (13,14, 1), (13,15, 1), (13,16, 4),
-    (17,18, 8), (18,19, 1), (18,20, 1),
-    (19,20, 1), (20,21, 5), (21,22, 1), (22,23, 1), (22,24, 5), (21,25,4),
-    (24,25, 3), (25,26, 1), (26,27, 1)
-]
+# Tennis court
+rpp5 = [
+    ('A', 'I', 11.885, False, False), ('A', 'M',   1.82, False, False), ('B', 'F',    6.4, False, False), ('C', 'G',   6.4, False, False),
+    ('D', 'H',    6.4, False, False), ('E', 'L', 11.885, False, False), ('E', 'Q',   1.82, False, False), ('F', 'G', 4.115, False, False),
+    ('F', 'J',  5.485, False, False), ('G', 'H',  4.115, False, False), ('H', 'K',  5.485, False, False), ('I', 'J',  1.37, False, False),
+    ('J', 'K',   8.23, False, False), ('K', 'L',   1.37, False, False), ('M', 'U', 11.885, False, False), ('N', 'R',   6.4, False, False),
+    ('O', 'S',    6.4, False, False), ('P', 'T',    6.4, False, False), ('Q', 'X', 11.885, False, False), ('R', 'V', 5.485, False, False),
+    ('R', 'S',  4.115, False, False), ('S', 'T',  4.115, False, False), ('T', 'W',  5.485, False, False), ('U', 'V',  1.37, False, False),
+    ('V', 'W',   8.23, False, False), ('W', 'X',   1.37, False, False)
 
-# Entirety of Pacific Spirit Park
-pacific_spirit = [
-    ( 1, 2, 1), ( 2, 3, 1), ( 3, 4, 1), ( 3,25, 6), ( 2, 4, 1), ( 2,24, 7),
-    ( 4, 5, 3), ( 5, 6, 1), ( 5,26, 6), ( 6, 7, 1), ( 6, 8, 1), ( 8, 9,12),
-    ( 8,26, 7), ( 9,10, 5), ( 9,19, 4), (10,11, 1), (10,19, 1), (10,12, 2),
-    (12,13, 4), (12,18, 1), (13,14, 1), (13,15, 1), (13,16, 4), (16,31, 1),
-    (31,30, 2), (30,94, 2), (94,17, 1), (17,18, 8), (18,19, 1), (18,20, 1),
-    (19,20, 1), (20,21, 5), (21,22, 1), (21,25, 4), (22,23, 1), (22,24, 5),
-    (24,25, 3), (25,26, 1), (26,27, 1), (28,103,3), (28,36, 4), (28,40, 1),
-    (16,32, 1), (32,33, 1), (32,31, 1), (32,35, 3), (31,34, 2), (34,30, 1),
-    (34,36, 1), (30,29, 3), (29,28, 1), (29,103,5), (29,95, 1), (17,95, 3),
-    (94,95, 3), (96,103,2), (96,100,1), (96,101,1), (97,100,1), (98,100,1),
-    (98,99, 1), (98,101,1), (101,102,1), (95,96,6), (41,103,1), (36,39, 1),
-    (35,36, 1), (35,38, 1), (38,37, 1), (38,39, 1), (39,40, 4), (39,59, 2),
-    (40,58, 3), (40,41, 3), (41,42, 3),
-    (41,58, 2), (42,43, 1), (43,44, 2), (44,45, 1), (44,46, 1), (43,46, 2),
-    (45,46, 1), (46,47, 1), (45,47, 1), (47,48, 3), (48,49, 3), (48,55, 1),
-    (45,49, 1),
-    (49,50, 4), (49,51,10), (51,52, 1), (51,90, 6), (51,91, 2), (48,52, 6),
-    (52,53, 4), (53,54, 1), (53,92, 3), (54,55, 1), (54,60, 4), (55,56, 3),
-    (42,56, 5), (56,57, 1), (57,58, 3), (57,60, 2), (60,61, 2), (61,62, 1),
-    (61,65, 2), (62,59, 6), (62,63, 2), (63,64, 1), (63,65, 2), (64,68, 2),
-    (64,70, 2), (59,70, 7), (70,71, 1), (71,72, 1), (38,71, 7), (71,74, 3),
-    (74,73, 1), (74,69, 1), (69,70, 2), (68,69, 1), (67,68, 3), (66,67, 1),
-    (66,78, 5), (65,66, 3), (53,65, 4), (66,93, 2), (67,77, 3), (68,77, 1),
-    (69,75, 1), (75,76, 2), (75,77, 1), (75,79, 2), (77,78, 2), (78,79, 1),
-    (79,80, 2), (79,81, 6), (81,82, 1), (81,83,16), (83,84, 5), (83,86, 1),
-    (84,85, 1), (85,86, 4), (85,87, 6), (86,87, 6), (86,93,14), (87,88, 1),
-    (87,89, 4), (87,90, 4), (90,91, 6), (91,92, 1), (92,93, 1)
+    # Serve area
+    , ('B', 'G',  7.609, False, True), ('B', 'H', 10.426, False, True), ('D', 'G',  7.609, False, True), ('D', 'F', 10.426, False, True)
+    , ('C', 'F',  7.609, False, True), ('C', 'H',  7.609, False, True), ('P', 'S',  7.609, False, True), ('P', 'R', 10.426, False, True)
+    , ('O', 'T',  7.609, False, True), ('O', 'R',  7.609, False, True), ('N', 'S',  7.609, False, True), ('N', 'T', 10.426, False, True)
+
+    # Deep area
+    , ('H', 'J',  9.890, False, True), ('G', 'K',  6.857, False, True), ('G', 'J',  6.857, False, True), ('F', 'K',  9.890, False, True)
+    , ('T', 'V',  9.890, False, True), ('S', 'W',  6.857, False, True), ('S', 'V',  6.857, False, True), ('R', 'W',  9.890, False, True)
+
+    # Lateral area
+    , ('T', 'X',  5.654, False, True), ('T', 'Q',  6.545, False, True), ('P', 'X', 11.964, False, True), ('W', 'Q', 11.964, False, True)
+    , ('R', 'U',  5.654, False, True), ('R', 'M',  6.545, False, True), ('V', 'M', 11.964, False, True), ('U', 'N', 11.964, False, True)
+    , ('F', 'A',  6.545, False, True), ('F', 'I',  5.654, False, True), ('A', 'J', 11.964, False, True), ('B', 'I', 11.964, False, True)
+    , ('H', 'E',  6.545, False, True), ('H', 'L',  5.654, False, True), ('E', 'K', 11.964, False, True), ('D', 'L', 11.964, False, True)
+
+    # Cross field.
+    , ('B', 'K', 14.456, False, True), ('D', 'J', 14.456, False, True), ('P', 'V', 14.456, False, True), ('N', 'W', 14.456, False, True)
+    , ('A', 'K', 15.278, False, True), ('E', 'J', 15.278, False, True), ('A', 'L', 16.174, False, True), ('E', 'I', 16.174, False, True)
+    , ('M', 'W', 15.278, False, True), ('Q', 'V', 15.278, False, True), ('M', 'X', 16.174, False, True), ('Q', 'U', 16.174, False, True)
+
+    # Net area.
+    , ('B', 'C',  4.115, False, True), ('C', 'D',  4.115, False, True), ('N', 'O',  4.115, False, True), ('O', 'P',  4.115, False, True)
+    , ('A', 'B',  1.370, False, True), ('D', 'E',  1.370, False, True), ('M', 'N',  1.370, False, True), ('P', 'Q',  1.370, False, True)
 ]
 

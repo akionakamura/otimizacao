@@ -27,7 +27,7 @@ def find_cost(path, graph):
     """
     start, end = path
 
-    all_nodes = graph.node_keys
+    all_nodes = graph.node_keys()
     unvisited = set(all_nodes)
     # Initialize all nodes to total graph cost (at least)
     total_cost = graph.total_cost
