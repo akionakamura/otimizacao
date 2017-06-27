@@ -1,3 +1,5 @@
+This was forked from [https://github.com/supermitch/Chinese-Postman](https://github.com/supermitch/Chinese-Postman).
+
 # Chinese-Postman Solver
 
 I wrote this program to solve the
