@@ -1,5 +1,7 @@
 This was forked from [https://github.com/supermitch/Chinese-Postman](https://github.com/supermitch/Chinese-Postman).
 
+Presentation of the developed work: [https://docs.google.com/presentation/d/1ollIjJgelIyOKeGfjfzVlAPBERXhdHy466kdPkuaDhc/edit?usp=sharing](https://docs.google.com/presentation/d/1ollIjJgelIyOKeGfjfzVlAPBERXhdHy466kdPkuaDhc/edit?usp=sharing)
+
 # Chinese-Postman Solver
 
 I wrote this program to solve the
